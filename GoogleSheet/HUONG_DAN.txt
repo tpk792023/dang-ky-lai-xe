@@ -1,0 +1,37 @@
+TRANG DANG KY DAO TAO LAI XE AN TOAN (Google Sheet + Apps Script + GitHub Pages)
+==============================================================================
+
+- Code.gs         : ma chay tren Google (luu nguoi dang ky vao Google Trang tinh)
+- ../index.html   : trang dang ky (len mang: https://tpk792023.github.io/dang-ky-lai-xe/)
+- ../mau.docx     : file mau danh sach, trang quan ly dung de xuat Word
+
+BUOC 1 - TAO GOOGLE TRANG TINH
+1. Vao sheets.google.com -> Trang tinh trong. Dat ten: "DK lai xe an toan Vinh Hau".
+   (Khong can tao cot, may tu tao trang tinh "DangKy" khi co nguoi dang ky dau tien.)
+
+BUOC 2 - DAN MA
+1. Tien ich mo rong -> Apps Script.
+2. Xoa het noi dung co san, dan toan bo file Code.gs vao.
+3. Doi ma quan ly o dong:   var MA_QUAN_LY = 'vinhhau2026';
+   (ma nay dung de XEM / XOA / TAI WORD danh sach; nguoi dang ky khong can ma).
+4. Bam Luu.
+
+BUOC 3 - TRIEN KHAI
+1. Trien khai -> Tuy chon trien khai moi -> banh rang -> Ung dung web.
+2. Thuc thi duoi dang: Toi.    Nguoi co quyen truy cap: Bat ky ai.
+3. Trien khai -> cap quyen (Nang cao -> Di toi ... -> Cho phep).
+4. Sao chep "URL ung dung web" dang https://script.google.com/macros/s/.../exec
+   va GUI CHO CLAUDE de gan vao trang (bien API_URL), roi dua len GitHub.
+
+SU DUNG
+- Gui link https://tpk792023.github.io/dang-ky-lai-xe/ cho moi nguoi (Zalo, ma QR...).
+- Nguoi dang ky dien: Ho ten, ngay sinh, dia chi, so GPLX (hoac "chua co"), SDT.
+  Cung ho ten + cung SDT gui lai thi chi sua thong tin cu, khong bi trung.
+- Quan ly: mo https://tpk792023.github.io/dang-ky-lai-xe/#quanly (hoac bam "Quan ly danh sach"
+  cuoi trang), nhap ma quan ly -> xem, xoa, "Tai Word theo mau" (dung mau cua Cong an xa,
+  cot Ky ten de trong de ky tay).
+- Du lieu goc luon nam trong Google Trang tinh, sua truc tiep o do cung duoc.
+
+SUA CODE.GS SAU NAY
+- Trien khai -> Quan ly cac ban trien khai -> but chi -> Phien ban: "Phien ban moi" -> Trien khai.
+  Lam vay link /exec giu nguyen, khong phai sua trang.
