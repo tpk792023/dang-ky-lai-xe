@@ -4,9 +4,9 @@
  * Trang web (GitHub Pages) gui POST JSON {"fn": "...", "args": [...]}.
  */
 
-// Ma de XEM / TAI danh sach (trang quan ly). Nguoi dang ky KHONG can ma.
-// Doi thanh ma rieng cua thay truoc khi trien khai.
-var MA_QUAN_LY = 'vinhhau2026';
+// De trong = ai mo trang quan ly cung xem / xoa / tai Word duoc, khong can ma.
+// Muon khoa lai thi go ma vao giua hai dau nhay, vi du 'vinhhau2026'.
+var MA_QUAN_LY = '';
 
 var SHEET_DK = 'DangKy';
 var HEAD = ['Mã', 'Họ và tên', 'Ngày sinh', 'Địa chỉ', 'Số GPLX', 'Số điện thoại', 'Thời gian đăng ký', 'Cập nhật lúc'];
@@ -64,7 +64,7 @@ function now_() {
 }
 
 function checkMa_(ma) {
-  if (String(ma || '') !== MA_QUAN_LY) {
+  if (MA_QUAN_LY && String(ma || '') !== MA_QUAN_LY) {
     Utilities.sleep(800);
     throw new Error('Sai mã quản lý.');
   }

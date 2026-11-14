@@ -122,7 +122,7 @@
   <!-- QUAN LY -->
   <section id="adminView" class="hidden">
     <div class="card">
-      <div class="tools">
+      <div class="tools hidden" id="maBox">
         <input id="ma" type="password" placeholder="Mã quản lý" autocomplete="current-password">
         <button id="load" type="button">Xem danh sách</button>
       </div>
@@ -234,21 +234,25 @@
     $("topWrap").classList.toggle("wide", admin);
     $("toggle").textContent = admin ? "← Về trang đăng ký" : "Quản lý danh sách";
     if (!admin) loadCount();
-    else { try { var m = sessionStorage.getItem("ma"); if (m) { $("ma").value = m; loadList(); } } catch (e) {} }
+    else { try { var m = sessionStorage.getItem("ma"); if (m) $("ma").value = m; } catch (e) {} loadList(true); }
   }
   $("toggle").addEventListener("click", function (e) {
     e.preventDefault(); location.hash = location.hash === "#quanly" ? "" : "quanly";
   });
   window.addEventListener("hashchange", route);
 
-  function loadList() {
+  // Khong can ma: tu mo danh sach. Neu Code.gs co dat ma thi moi hien o nhap ma.
+  function loadList(auto) {
     var ma = $("ma").value.trim(); var am = $("amsg"); am.className = "msg";
-    if (!ma) { show(am, "err", "Nhập mã quản lý."); return; }
     $("load").disabled = true;
     api("danhSach", [ma]).then(function (rows) {
-      try { sessionStorage.setItem("ma", ma); } catch (e) {}
+      try { if (ma) sessionStorage.setItem("ma", ma); } catch (e) {}
+      $("maBox").classList.toggle("hidden", !ma);
       DATA = rows; renderList(); $("adminBody").classList.remove("hidden");
-    }).catch(function (err) { show(am, "err", err.message); $("adminBody").classList.add("hidden"); })
+    }).catch(function (err) {
+      $("maBox").classList.remove("hidden"); $("adminBody").classList.add("hidden");
+      if (!(auto === true && /mã quản lý/.test(err.message) && !ma)) show(am, "err", err.message);
+    })
       .then(function () { $("load").disabled = false; });
   }
   function renderList() {
@@ -259,15 +263,15 @@
         "</td><td><button class='ghost small' data-del='" + esc(r.ma) + "'>Xóa</button></td></tr>";
     }).join("") || "<tr><td colspan='8' class='n'>Chưa có ai đăng ký.</td></tr>";
   }
-  $("load").addEventListener("click", loadList);
+  $("load").addEventListener("click", function () { loadList(); });
   $("ma").addEventListener("keydown", function (e) { if (e.key === "Enter") loadList(); });
-  $("reload").addEventListener("click", loadList);
+  $("reload").addEventListener("click", function () { loadList(); });
   $("tb").addEventListener("click", function (e) {
     var id = e.target.getAttribute("data-del"); if (!id) return;
     var r = DATA.filter(function (x) { return x.ma === id; })[0];
     if (!confirm("Xóa " + (r ? r.ten : "người này") + " khỏi danh sách?")) return;
     e.target.disabled = true;
-    api("xoa", [$("ma").value.trim(), id]).then(loadList).catch(function (err) { alert(err.message); e.target.disabled = false; });
+    api("xoa", [$("ma").value.trim(), id]).then(function () { loadList(); }).catch(function (err) { alert(err.message); e.target.disabled = false; });
   });
 
   // ---------- Xuat Word theo mau (mau.docx) ----------

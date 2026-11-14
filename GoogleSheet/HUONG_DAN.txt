@@ -12,8 +12,8 @@ BUOC 1 - TAO GOOGLE TRANG TINH
 BUOC 2 - DAN MA
 1. Tien ich mo rong -> Apps Script.
 2. Xoa het noi dung co san, dan toan bo file Code.gs vao.
-3. Doi ma quan ly o dong:   var MA_QUAN_LY = 'vinhhau2026';
-   (ma nay dung de XEM / XOA / TAI WORD danh sach; nguoi dang ky khong can ma).
+3. Mac dinh KHONG can ma: var MA_QUAN_LY = '';  -> ai mo trang quan ly cung xem duoc danh sach.
+   Muon khoa lai: go ma vao giua hai dau nhay, vi du var MA_QUAN_LY = 'vinhhau2026';
 4. Bam Luu.
 
 BUOC 3 - TRIEN KHAI
@@ -28,7 +28,7 @@ SU DUNG
 - Nguoi dang ky dien: Ho ten, ngay sinh, dia chi, so GPLX (hoac "chua co"), SDT.
   Cung ho ten + cung SDT gui lai thi chi sua thong tin cu, khong bi trung.
 - Quan ly: mo https://tpk792023.github.io/dang-ky-lai-xe/#quanly (hoac bam "Quan ly danh sach"
-  cuoi trang), nhap ma quan ly -> xem, xoa, "Tai Word theo mau" (dung mau cua Cong an xa,
+  cuoi trang) -> danh sach hien ngay -> xem, xoa, "Tai Word theo mau" (dung mau cua Cong an xa,
   cot Ky ten de trong de ky tay).
 - Du lieu goc luon nam trong Google Trang tinh, sua truc tiep o do cung duoc.
 
