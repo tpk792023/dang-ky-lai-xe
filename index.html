@@ -6,9 +6,6 @@
 <title>Đăng ký lái xe an toàn</title>
 <meta name="description" content="Đăng ký tham gia đào tạo kỹ năng lái xe mô tô, xe gắn máy an toàn trên địa bàn xã Vĩnh Hậu">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%231d4ed8'/%3E%3Ccircle cx='20' cy='40' r='8' fill='none' stroke='white' stroke-width='4'/%3E%3Ccircle cx='44' cy='40' r='8' fill='none' stroke='white' stroke-width='4'/%3E%3Cpath d='M20 40 L30 24 H40 L44 40' fill='none' stroke='white' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
   :root {
@@ -29,7 +26,7 @@
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--ink);
-    font: 17px/1.55 "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+    font: 18px/1.55 "Times New Roman", Times, serif; }
   .wrap { max-width: 660px; margin: 0 auto; padding: 16px 16px 48px; }
   header.top { position: relative; color: #fff; overflow: hidden;
     background:
@@ -326,7 +323,7 @@
     return tpl.replace(/<w:tc>[\s\S]*?<\/w:tc>/g, function (tc) {
       var v = vals[i++];
       if (!v && v !== 0) return tc;
-      var run = '<w:r><w:rPr><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t xml:space="preserve">' + xmlEsc(v) + "</w:t></w:r>";
+      var run = '<w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t xml:space="preserve">' + xmlEsc(v) + "</w:t></w:r>";
       var cell = tc.replace(/<\/w:p>(?![\s\S]*<\/w:p>)/, run + "</w:p>");
       if (i === 2 || i === 4) cell = cell.replace(/<w:jc w:val="center"\/>/, '<w:jc w:val="left"/>'); // ten, dia chi canh trai
       return cell;
@@ -346,7 +343,7 @@
           var body = DATA.map(function (r, i) {
             return fillRow(tpl, [i + 1, r.ten, r.ngaySinh, r.diaChi, r.gplx, r.sdt, ""]);
           });
-          for (var k = 0; k < 3; k++) body.push(tpl); // vai dong trong de ghi tay them
+          if (!body.length) body.push(tpl); // chua ai dang ky: giu 1 dong trong
           var pre = tbl.slice(0, tbl.indexOf("<w:tr"));
           var newTbl = pre + head + body.join("") + "</w:tbl>";
           zip.file("word/document.xml", xml.slice(0, a) + newTbl + xml.slice(b));
